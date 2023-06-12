@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Connect to Jenkins
-        uses: jenkins-ci/jenkins@master
+        uses: jenkinsci/jenkins@master
         with:
           url: ${{ secrets.JENKINS_URL }}
           username: ${{ secrets.JENKINS_USERNAME }}
