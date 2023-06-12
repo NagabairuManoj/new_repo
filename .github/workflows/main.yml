@@ -1,0 +1,19 @@
+name: Connect to Jenkins
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  connect-to-jenkins:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Connect to Jenkins
+        uses: jenkins-ci/jenkins@master
+        with:
+          url: ${{ secrets.JENKINS_URL }}
+          username: ${{ secrets.JENKINS_USERNAME }}
+          password: ${{ secrets.JENKINS_PASSWORD }}
+          script: |
+            jenkins.job.build 'new_pipeline_1'
