@@ -9,7 +9,10 @@ jobs:
   connect-to-jenkins:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Connect to Jenkins
+        
         uses: jenkinsci/jenkins@master
         with:
           url: ${{ secrets.JENKINS_URL }}
