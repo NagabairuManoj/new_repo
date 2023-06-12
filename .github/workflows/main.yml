@@ -19,7 +19,7 @@ jobs:
           JENKINS_JOB: ${{secrets.JENKINS_JOB}}
           JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
         run: |
-          curl -X POST -u "${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/build"
+          curl -X POST -u "${JENKINS_USERNAME}:${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/build"
 
       - name: Wait for Jenkins Pipeline
         env:
@@ -27,7 +27,7 @@ jobs:
           JENKINS_JOB: ${{secrets.JENKINS_JOB}}
           JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
         run: |
-          while [[ "$(curl -s -u "${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/lastBuild/api/json" | jq -r '.building')" == "true" ]]; do
+          while [[ "$(curl -s -u "${JENKINS_USERNAME}:${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/lastBuild/api/json" | jq -r '.building')" == "true" ]]; do
               sleep 10
           done
 
@@ -37,7 +37,7 @@ jobs:
           JENKINS_JOB: ${{secrets.JENKINS_JOB}}
           JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
         run: |
-          JENKINS_STATUS=$(curl -s -u "${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/lastBuild/api/json" | jq -r '.result')
+          JENKINS_STATUS=$(curl -s -u "${JENKINS_USERNAME}:${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/lastBuild/api/json" | jq -r '.result')
 
           if [[ "${JENKINS_STATUS}" == "SUCCESS" ]]; then
             echo "Jenkins pipeline succeeded."
