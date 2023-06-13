@@ -16,9 +16,9 @@ jobs:
 
       - name: Trigger Jenkins Pipeline
         env:
-          JENKINS_URL: ${{env.JENKINS_URL}}
-          JENKINS_JOB: ${{env.JENKINS_JOB}}
-          JENKINS_TOKEN: ${{ env.JENKINS_TOKEN }}
+          JENKINS_URL: ${{JENKINS_URL}}
+          JENKINS_JOB: ${{JENKINS_JOB}}
+          JENKINS_TOKEN: ${{JENKINS_TOKEN}}
         run: |
           curl -X POST -u "${JENKINS_USERNAME}:${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/build"
 
