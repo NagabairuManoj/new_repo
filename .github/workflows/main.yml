@@ -3,8 +3,7 @@ name: Jenkins Pipeline for test
 on:
   push:
     branches:
-      - master
-      - tests
+       ["master", "tests" ]
 
 jobs:
   jenkins-pipeline:
