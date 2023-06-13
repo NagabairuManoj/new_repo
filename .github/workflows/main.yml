@@ -5,6 +5,7 @@ on:
     branches:
       - master
 
+
 jobs:
   jenkins-pipeline:
     runs-on: ubuntu-latest
@@ -15,17 +16,17 @@ jobs:
 
       - name: Trigger Jenkins Pipeline
         env:
-          JENKINS_URL: ${{secrets.JENKINS_URL}}
-          JENKINS_JOB: ${{secrets.JENKINS_JOB}}
-          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
+          JENKINS_URL: ${{env.JENKINS_URL}}
+          JENKINS_JOB: ${{env.JENKINS_JOB}}
+          JENKINS_TOKEN: ${{ env.JENKINS_TOKEN }}
         run: |
           curl -X POST -u "${JENKINS_USERNAME}:${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/build"
 
       - name: Wait for Jenkins Pipeline
         env:
-          JENKINS_URL: ${{secrets.JENKINS_URL}}
-          JENKINS_JOB: ${{secrets.JENKINS_JOB}}
-          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
+          JENKINS_URL: ${{env.JENKINS_URL}}
+          JENKINS_JOB: ${{env.JENKINS_JOB}}
+          JENKINS_TOKEN: ${{ env.JENKINS_TOKEN }}
         run: |
           while [[ "$(curl -s -u "${JENKINS_USERNAME}:${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/lastBuild/api/json" | jq -r '.building')" == "true" ]]; do
               sleep 10
@@ -33,9 +34,9 @@ jobs:
 
       - name: Get Jenkins Pipeline Status
         env:
-          JENKINS_URL: ${{secrets.JENKINS_URL}}
-          JENKINS_JOB: ${{secrets.JENKINS_JOB}}
-          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
+          JENKINS_URL: ${{env.JENKINS_URL}}
+          JENKINS_JOB: ${{env.JENKINS_JOB}}
+          JENKINS_TOKEN: ${{ env.JENKINS_TOKEN }}
         run: |
           echo $(JENKINS_JOB)
           JENKINS_STATUS=$(curl -s -u "${JENKINS_USERNAME}:${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/lastBuild/api/json" | jq -r '.result')
