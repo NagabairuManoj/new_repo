@@ -41,7 +41,6 @@ jobs:
           JENKINS_JOB: ${{env.JENKINS_JOB}}
           JENKINS_TOKEN: ${{ env.JENKINS_TOKEN }}
         run: |
-          echo $(JENKINS_JOB)
           JENKINS_STATUS=$(curl -s -u "${JENKINS_USERNAME}:${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/lastBuild/api/json" | jq -r '.result')
 
           if [[ "${JENKINS_STATUS}" == "SUCCESS" ]]; then
