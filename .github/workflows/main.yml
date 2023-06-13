@@ -4,12 +4,11 @@ on:
   push:
     branches:
       - master
-      - task
 
 jobs:
   jenkins-pipeline:
     runs-on: ubuntu-latest
-    #environment: test_environment
+    environment: test_environment
 
     steps:
       - name: Checkout Repository
