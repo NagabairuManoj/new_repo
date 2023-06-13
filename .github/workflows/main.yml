@@ -8,6 +8,7 @@ env:
     JENKINS_JOB: new_job
     JENKINS_TOKEN:  11a73fb95e76eae6a1533e47323be8d04a
     JENKINS_URL: http://18.142.244.1:8080/
+    JENKINS_USERNAME: manoj
 
 jobs:
   jenkins-pipeline:
