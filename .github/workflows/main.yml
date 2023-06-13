@@ -37,7 +37,7 @@ jobs:
           JENKINS_JOB: new_job
           JENKINS_TOKEN: 11a73fb95e76eae6a1533e47323be8d04a
         run: |
-          JENKINS_STATUS=$(curl -s -u "manoj:11a73fb95e76eae6a1533e47323be8d04a" "http://18.142.244.1:8080//job/manoj/lastBuild/api/json" | jq -r '.result')
+          JENKINS_STATUS=$(curl -s -u "manoj:11a73fb95e76eae6a1533e47323be8d04a" "http://18.142.244.1:8080/job/new_job/lastBuild/api/json" | jq -r '.result')
 
           if [[ "${JENKINS_STATUS}" == "SUCCESS" ]]; then
             echo "Jenkins pipeline succeeded."
