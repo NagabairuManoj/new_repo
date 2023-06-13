@@ -15,29 +15,29 @@ jobs:
 
       - name: Trigger Jenkins Pipeline
         env:
-          JENKINS_URL: ${{secrets.JENKINS_URL}}
-          JENKINS_JOB: ${{secrets.JENKINS_JOB}}
-          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
+          JENKINS_URL: http://18.142.244.1:8080/
+          JENKINS_JOB: new_job
+          JENKINS_TOKEN: 11a73fb95e76eae6a1533e47323be8d04a
         run: |
-          curl -X POST -u "${JENKINS_USERNAME}:${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/build"
+          curl -X POST -u "manoj:11a73fb95e76eae6a1533e47323be8d04a" "http://18.142.244.1:8080//job/new_job/build"
 
       - name: Wait for Jenkins Pipeline
         env:
-          JENKINS_URL: ${{secrets.JENKINS_URL}}
-          JENKINS_JOB: ${{secrets.JENKINS_JOB}}
-          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
+          JENKINS_URL: http://18.142.244.1:8080/
+          JENKINS_JOB: new_job
+          JENKINS_TOKEN: http://18.142.244.1:8080/
         run: |
-          while [[ "$(curl -s -u "${JENKINS_USERNAME}:${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/lastBuild/api/json" | jq -r '.building')" == "true" ]]; do
+          while [[ "$(curl -s -u "manoj:11a73fb95e76eae6a1533e47323be8d04a" "http://18.142.244.1:8080//job/new_job/lastBuild/api/json" | jq -r '.building')" == "true" ]]; do
               sleep 10
           done
 
       - name: Get Jenkins Pipeline Status
         env:
-          JENKINS_URL: ${{secrets.JENKINS_URL}}
-          JENKINS_JOB: ${{secrets.JENKINS_JOB}}
-          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
+          JENKINS_URL: http://18.142.244.1:8080/
+          JENKINS_JOB: new_job
+          JENKINS_TOKEN: 11a73fb95e76eae6a1533e47323be8d04a
         run: |
-          JENKINS_STATUS=$(curl -s -u "${JENKINS_USERNAME}:${JENKINS_TOKEN}" "${JENKINS_URL}/job/${JENKINS_JOB}/lastBuild/api/json" | jq -r '.result')
+          JENKINS_STATUS=$(curl -s -u "manoj:11a73fb95e76eae6a1533e47323be8d04a" "http://18.142.244.1:8080//job/manoj/lastBuild/api/json" | jq -r '.result')
 
           if [[ "${JENKINS_STATUS}" == "SUCCESS" ]]; then
             echo "Jenkins pipeline succeeded."
