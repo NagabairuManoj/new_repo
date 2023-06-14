@@ -1,11 +1,22 @@
 pipeline {
-    agent any
+  agent any
+  
+  stages {
+    stage('Extract JSON Data') {
+      steps {
+        script {
+          def payload = readJSON text: env.BODY
 
-    stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello World'
-            }
+          // Extract the desired JSON fields from the payload
+          def repositoryUrl = payload.repository.url
+          def commitMessage = payload.head_commit.message
+
+          // Use the extracted data in your pipeline steps
+          echo "Repository URL: ${repositoryUrl}"
+          echo "Commit Message: ${commitMessage}"
         }
+      }
     }
+  }
 }
+
