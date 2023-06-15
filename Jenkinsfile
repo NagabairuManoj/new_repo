@@ -5,7 +5,7 @@ pipeline {
         stage('Run Command') {
             steps {
                 script {
-                    "echo ${params.test} > hi.json"
+                    "echo ${params.test} "
                 }
             }
         }
