@@ -2,15 +2,20 @@ pipeline {
     agent any
     
     stages {
-        stage('Extract JSON Data') {
+        stage('Process Webhook') {
             steps {
-                echo "start"
-                webhookVar = params.test_var
-                echo "Webhook Variable: ${webhookVar}"
-                echo "end"
+                script {
+                    def webhookVar = params.test_var
+                    
+                    // Use the webhook variable in your pipeline steps
+                    echo "Webhook Variable: ${webhookVar}"
+                }
             }
         }
+        
+        // Other stages in your pipeline
     }
 }
+
 
 
