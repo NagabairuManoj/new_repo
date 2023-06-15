@@ -1,13 +1,8 @@
 import groovy.json.JsonSlurper
 
-def parseJson(payload) {
-    def jsonSlurper = new JsonSlurper()
-    def json = jsonSlurper.parseText(payload)
-    return json
-}
-def getRepoURL() {
-  sh "git config --get remote.origin.url > .git/remote-url"
-  return readFile(".git/remote-url").trim()
+def response = httpRequest "http://18.142.244.1:8080/generic-webhook-trigger/invoke?token=authtoken"
+node() {
+    writeFile file: 'response.json', text: response.content
 }
 pipeline {
     agent any
@@ -16,7 +11,7 @@ pipeline {
         stage('Extract JSON Data') {
             steps {
                 script {
-                    def payload = getRepoURL()
+                    payload = readFile 'response.json'
                     
                     // Parse the JSON payload
                     def parsedPayload = parseJson(payload)
