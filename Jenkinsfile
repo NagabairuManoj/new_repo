@@ -5,7 +5,8 @@ pipeline {
         stage('Extract JSON Data') {
             steps {
                 echo "start"
-                echo $test_var
+                def webhookVar = params.test_var
+                echo "Webhook Variable: ${webhookVar}"
                 echo "end"
             }
         }
