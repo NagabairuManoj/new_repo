@@ -9,7 +9,7 @@ pipeline {
                     
                     // Use the webhook variable in your pipeline steps
                     echo "Webhook Variable: ${webhookVar}"
-                    echo "Params: ${params}"
+                    echo "Params: ${params.test}"
                 }
             }
         }
