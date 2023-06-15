@@ -17,8 +17,8 @@ pipeline {
                     //def webhookVar = params.test
                     
                     // Use the webhook variable in your pipeline steps
-                    echo "Webhook Variable: ${webhookVar}"
-                    echo "Params: ${params.test}"
+                    //echo "Webhook Variable: ${webhookVar}"
+//                     echo "Params: ${params.test}"
                 }
             }
         }
