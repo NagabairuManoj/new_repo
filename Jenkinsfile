@@ -5,7 +5,8 @@ pipeline {
         stage('Run Command') {
             steps {
                 script {
-                    "echo ${params.test} "
+                    sh "echo ${params.test} > hi.json"
+                    sh 'cat hi.json | grep \'clone_url\''
                 }
             }
         }
