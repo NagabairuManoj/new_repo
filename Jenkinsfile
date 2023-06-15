@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     "echo ${params.test} > hi.json"
-                    "cat hi.json | grep "clone_url""
+                    "cat hi.json | grep 'clone_url'"
                 }
             }
         }
