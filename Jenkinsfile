@@ -5,7 +5,7 @@ pipeline {
         stage('Hello') {
             steps {
                 script {
-                    echo "${params.test}" | grep "clone_url"
+                    sh 'echo ${params.test} | grep "clone_url"'
                     
                 }
             }
