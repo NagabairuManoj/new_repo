@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Extract JSON Data') {
             steps {
-                echo "hello"
+                echo $test_var
+                echo ${test_var}
             }
         }
     }
