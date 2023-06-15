@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     sh "echo ${params.test} > hi.json"
-                    def url = sh(script: "cat hi.json | awk -F '\"clone_url\":\"|\"' '{print \\$2}'", returnStdout: true).trim()
+                    def url = sh(script: "cat hi.json | sed -n -e 's/.*\"clone_url\":\"\\([^\"]*\\).*/\\1/p'", returnStdout: true).trim()
                     echo "The URL is: ${url}"
                 }
             }
