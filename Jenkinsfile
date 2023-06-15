@@ -4,9 +4,7 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-                def test = params.test
                 echo "${params.test}"
-                echo "${test}"
             }
         }
     }
