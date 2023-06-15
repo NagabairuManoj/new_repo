@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-                echo ${params.test}
+                echo "${params.test}"
             }
         }
     }
