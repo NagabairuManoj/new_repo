@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
+                script {
                 def test = params.test
                 import groovy.json.JsonSlurper
                 def jsonSlurper = new JsonSlurper()
@@ -11,6 +12,7 @@ pipeline {
                 def cloneUrl = parsedJson.repository.html_url
 
                 println "Clone URL: ${cloneUrl}"
+                }
             }
         }
     }
