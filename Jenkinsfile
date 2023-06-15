@@ -5,6 +5,10 @@ def parseJson(payload) {
     def json = jsonSlurper.parseText(payload)
     return json
 }
+def getRepoURL() {
+  sh "git config --get remote.origin.url > .git/remote-url"
+  return readFile(".git/remote-url").trim()
+}
 pipeline {
     agent any
     
@@ -12,7 +16,7 @@ pipeline {
         stage('Extract JSON Data') {
             steps {
                 script {
-                    def payload = env.BODY
+                    def payload = getRepoURL()
                     
                     // Parse the JSON payload
                     def parsedPayload = parseJson(payload)
