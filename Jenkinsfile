@@ -15,7 +15,7 @@ pipeline {
 
         stage('Git Clone') {
             environment {
-                GIT_CREDENTIALS = credentials('your-git-credentials-id')
+                GIT_CREDENTIALS = credentials('5b5bc46c-c754-45a3-b6b4-ee52addb09bb')
             }
             steps {
                 script {
