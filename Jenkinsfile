@@ -22,7 +22,7 @@ pipeline {
                     def gitUrl = env.URL // Retrieve the URL from the environment variable
                     dir('workspace') {
                         withCredentials([usernamePassword(credentialsId: env.GIT_CREDENTIALS, usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                            git url: gitUrl, branch: 'NagabairuManoj-patch-1', credentialsId: env.GIT_CREDENTIALS, username: env.GIT_USERNAME, password: env.GIT_PASSWORD
+                            git url: gitUrl, branch: 'master', credentialsId: env.GIT_CREDENTIALS, username: env.GIT_USERNAME, password: env.GIT_PASSWORD
                             //echo ${env.GIT_USERNAME}
                             //echo ${env.GIT_PASSWORD}
                         }
