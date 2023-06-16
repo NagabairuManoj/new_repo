@@ -22,15 +22,17 @@ pipeline {
                     def gitUrl = env.URL // Retrieve the URL from the environment variable
                     withCredentials([usernamePassword(credentialsId: env.GIT_CREDENTIALS, usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                         dir('workspace') {
-                            maskPasswords("${env.GIT_USERNAME}", "${env.GIT_PASSWORD}") {
-                                git(
-                                    url: gitUrl,
-                                    branch: 'master',
-                                    credentialsId: env.GIT_CREDENTIALS,
-                                    username: env.GIT_USERNAME,
-                                    password: env.GIT_PASSWORD
-                                )
-                            }
+                            // Manually mask the sensitive variables
+                            mask("${env.GIT_USERNAME}")
+                            mask("${env.GIT_PASSWORD}")
+                            
+                            git(
+                                url: gitUrl,
+                                branch: 'master',
+                                credentialsId: env.GIT_CREDENTIALS,
+                                username: env.GIT_USERNAME,
+                                password: env.GIT_PASSWORD
+                            )
                         }
                     }
                 }
