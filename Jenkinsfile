@@ -14,11 +14,16 @@ pipeline {
         }
 
         stage('Git Clone') {
+            environment {
+                GIT_CREDENTIALS = credentials('your-git-credentials-id')
+            }
             steps {
                 script {
                     def gitUrl = env.URL // Retrieve the URL from the environment variable
                     dir('workspace') {
-                        git url: gitUrl, branch: 'master' // Perform the git clone using the URL
+                        withCredentials([usernamePassword(credentialsId: env.GIT_CREDENTIALS, usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                            git url: gitUrl, branch: 'master', credentialsId: env.GIT_CREDENTIALS, username: env.GIT_USERNAME, password: env.GIT_PASSWORD
+                        }
                     }
                 }
             }
