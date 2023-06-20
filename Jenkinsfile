@@ -13,7 +13,9 @@ pipeline {
         }
         stage('Git Checkout') {
             steps {
-                git branch: 'master', credentialsId: '5b5bc46c-c754-45a3-b6b4-ee52addb09bb', url: env.URL
+                dir('repo1'){
+                 git branch: 'master', credentialsId: '5b5bc46c-c754-45a3-b6b4-ee52addb09bb', url: env.URL
+                }
             }
         }
         stage('Get Directory Name') {
