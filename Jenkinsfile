@@ -16,5 +16,14 @@ pipeline {
                 git branch: 'master', credentialsId: '5b5bc46c-c754-45a3-b6b4-ee52addb09bb', url: env.URL
             }
         }
+        stage('Get Directory Name') {
+            steps {
+                script {
+                    def command = 'basename "$(pwd)"'
+                    def result = sh(returnStdout: true, script: command).trim()
+                    println "Directory name: ${result}"
+                }
+            }
+        }
     }
 }
