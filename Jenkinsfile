@@ -10,6 +10,7 @@ pipeline {
                     env.URL = url // Store the URL in an environment variable for later use
                     def repo_name = sh(returnStdout: true, script: "echo ${url} | awk -F/ '{ print \$(NF-0) }' | sed 's/\\.git\$//'").trim()
                     env.REPO_NAME = repo_name
+                    echo "the repo name is : ${repo_name}"
                 }
             }
         }
